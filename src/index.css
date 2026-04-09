@@ -57,6 +57,7 @@ body {
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
+  max-height: 100%;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -143,4 +144,32 @@ code {
 .navbar-custom .navbar-toggler:hover .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(240, 240, 240, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
   cursor: pointer;
+}
+
+/* custom scrollbar for restaurants page */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c5050c;
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a3040a;
+}
+
+/* quick link cards move on hover */
+.quick-link-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* makes the icons react */
+.quick-link-card:hover .lucide {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
 }
