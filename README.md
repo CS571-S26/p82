@@ -32,4 +32,6 @@ cards.
 
 By the end of the semester, I am hoping to also incorporate an AI
 agent to provide personalized itineraries based on user preferences for
-food, parking prices/locations, and walking distances.
+food, parking prices/locations, and walking distances. I also hope to partner with 
+the University of Wisconsin-Madison to use their live university-owned parking
+availability data to better assist badger fans looking for parking on gamedays.
