@@ -1,8 +1,11 @@
 import { Card, Button, Badge } from "react-bootstrap";
 import { MapPin, Clock, DollarSign, Car } from "lucide-react";
 
-const ParkingCard = ({ lot, isSelected }) => {
+const ParkingCard = ({ lot, isSelected, isSaved, onSelect }) => {
   const vacantDisplay = lot.vacant !== undefined ? lot.vacant : "---";
+  const totalDisplay = lot.totalSpaces || "---";
+
+  const priceLabel = lot.cityOwned ? "/hr" : "/day";
 
   return (
     <Card
@@ -15,11 +18,12 @@ const ParkingCard = ({ lot, isSelected }) => {
       }}
     >
       <Card.Body className="p-3">
-        {" "}
         {/* sidebar */}
         <div className="d-flex justify-content-between align-items-start mb-2">
           <h5 className="fw-bold mb-0">{lot.name}</h5>
-          <Badge bg={lot.vacant > 10 ? "success" : "warning"}>{vacantDisplay} spots</Badge>
+          <Badge bg={lot.vacant > 10 ? "success" : "warning"}>
+            {lot.liveId ? vacantDisplay : totalDisplay} spots
+          </Badge>
         </div>
         <div className="d-flex align-items-center text-muted mb-3 small">
           <MapPin size={14} className="me-1" />
@@ -28,14 +32,21 @@ const ParkingCard = ({ lot, isSelected }) => {
         <div className="d-flex justify-content-between mb-3 text-dark small fw-medium">
           <span>
             <Clock size={14} className="me-1" />
-            {lot.walkTime} min
+            {lot.tags?.includes("Shuttle")
+              ? `${lot.walkTime} min w/ Shuttle`
+              : `${lot.walkTime} min`}
           </span>
           <span>
-            <DollarSign size={14} className="me-1" />${lot.hourlyRate}/hr
+            <DollarSign size={14} className="me-1" />${lot.hourlyRate}
+            {priceLabel}
           </span>
         </div>
-        <Button variant={isSelected ? "danger" : "outline-danger"} className="w-100 btn-sm fw-bold">
-          Select This Lot
+        <Button
+          variant={isSaved ? "outline-danger" : "danger"}
+          onClick={() => onSelect(lot)}
+          className="w-100 btn-sm fw-bold"
+        >
+          {isSaved ? "Selected" : "Select Lot"}
         </Button>
       </Card.Body>
     </Card>

@@ -173,3 +173,18 @@ code {
   transform: scale(1.1);
   transition: transform 0.2s ease;
 }
+
+/* marker bounces on map */
+.marker-bounce {
+  animation: bounce 0.5s infinite alternate;
+  -webkit-animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}

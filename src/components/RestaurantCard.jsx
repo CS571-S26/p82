@@ -1,7 +1,7 @@
-import { Card, Badge } from "react-bootstrap";
+import { Card, Badge, Button } from "react-bootstrap";
 import { Star, MapPin, CalendarCheck } from "lucide-react";
 
-export default function RestaurantCard({ restaurant, isSelected }) {
+export default function RestaurantCard({ restaurant, isSelected, isSaved, onSelect }) {
   const placeholderImg = `https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=500&auto=format&fit=crop`;
 
   return (
@@ -17,7 +17,7 @@ export default function RestaurantCard({ restaurant, isSelected }) {
       <div style={{ height: "140px", overflow: "hidden", position: "relative" }}>
         <Card.Img
           variant="top"
-          src={placeholderImg}
+          src={restaurant.img}
           style={{ objectFit: "cover", height: "100%" }}
         />
         <Badge bg="dark" className="position-absolute top-0 end-0 m-2">
@@ -32,12 +32,12 @@ export default function RestaurantCard({ restaurant, isSelected }) {
         )}
       </div>
 
-      <Card.Body className="d-flex flex-column text-center">
-        <Card.Title className="fw-bold mb-1">{restaurant.name}</Card.Title>
+      <Card.Body className="d-flex flex-column p-3">
+        <Card.Title className="fw-bold mb-1 text-center">{restaurant.name}</Card.Title>
 
         {/* address */}
         <div className="d-flex align-items-center justify-content-center text-muted small mb-2">
-          <MapPin size={12} className="me-1" />
+          <MapPin size={12} className="me-1 flex-shrink-0" />
           <span className="text-truncate" style={{ maxWidth: "200px" }}>
             {restaurant.address}
           </span>
@@ -49,20 +49,31 @@ export default function RestaurantCard({ restaurant, isSelected }) {
             <Star size={14} className="text-warning fill-warning me-1" />
             <span className="fw-bold">{restaurant.rating}</span>
           </div>
-          <span className="text-muted">|</span>
+          <span className="text-muted small">|</span>
           <span className="small text-secondary">{restaurant.walkTime} min walk</span>
         </div>
 
         {/* avg wait time */}
-        <div className="mt-auto">
+        <div className="mt-auto d-flex flex-column gap-2">
           <Badge
             bg={restaurant.avgWait > 40 ? "danger-subtle" : "success-subtle"}
-            className={
-              restaurant.avgWait > 40 ? "text-danger w-100 py-2" : "text-success w-100 py-2"
-            }
+            className={`py-2 border ${restaurant.avgWait > 40 ? "text-danger border-danger-subtle" : "text-success border-success-subtle"}`}
           >
-            Average Wait: {restaurant.avgWait} mins
+            Wait Time: {restaurant.avgWait} mins
           </Badge>
+
+          {/* select button */}
+          <Button
+            size="sm"
+            variant={isSaved ? "outline-danger" : "danger"}
+            className="fw-bold py-2"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect(restaurant);
+            }}
+          >
+            {isSaved ? "Selected" : "Select Restaurant"}
+          </Button>
         </div>
       </Card.Body>
     </Card>

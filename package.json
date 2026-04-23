@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@googlemaps/markerclusterer": "^2.5.1",
+    "@vis.gl/react-google-maps": "latest",
     "bootstrap": "^5.3.8",
     "firebase": "^12.11.0",
     "lucide-react": "^1.7.0",

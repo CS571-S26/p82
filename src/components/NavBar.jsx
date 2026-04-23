@@ -68,6 +68,15 @@ export default function NavBar() {
                 <Utensils size={18} />
                 Restaurants
               </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="/dashboard"
+                active={isActive("/dashboard")}
+                className="d-flex align-items-center gap-1"
+              >
+                <LayoutDashboard size={18} />
+                Dashboard
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
