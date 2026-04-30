@@ -47,7 +47,7 @@ export default function Dashboard({ savedParking, savedRestaurant }) {
 
   const staticMapSrc =
     savedParking && savedRestaurant
-      ? `https://maps.googleapis.com/maps/api/staticmap?size=400x200&scale=2&maptype=roadmap&markers=color:gray|label:P|${encodeURIComponent(savedParking.name + " Madison WI")}&markers=color:red|label:F|${encodeURIComponent(savedRestaurant.name + " Madison WI")}&markers=color:red|label:S|Camp+Randall+Stadium&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
+      ? `https://maps.googleapis.com/maps/api/staticmap?size=400x200&scale=2&maptype=roadmap&markers=color:gray%7Clabel:P%7C${encodeURIComponent(savedParking.name + " Madison WI")}&markers=color:red%7Clabel:F%7C${encodeURIComponent(savedRestaurant.name + " Madison WI")}&markers=color:red%7Clabel:S%7CCamp+Randall+Stadium&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
       : null;
 
   return (
