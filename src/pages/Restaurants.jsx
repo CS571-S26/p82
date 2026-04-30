@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { db } from "../firebase.js";
 import { collection, getDocs } from "firebase/firestore";
 import RestaurantCarousel from "../components/RestaurantCarousel.jsx";
 import BadgerMap from "../components/BadgerMap.jsx";
+import { Spinner } from "react-bootstrap";
 
 function Restaurants({ saveRestaurant, setSaveRestaurant }) {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeId, setActiveId] = useState(null);
+  const cardRefs = useRef({});
 
   useEffect(() => {
     getDocs(collection(db, "restaurants")).then((snapshot) => {
@@ -23,7 +25,11 @@ function Restaurants({ saveRestaurant, setSaveRestaurant }) {
   }, []);
 
   if (loading) {
-    return <p>Loading restaurants...</p>;
+    return (
+      <div className="text-center py-4">
+        <Spinner animation="border" variant="danger" />
+      </div>
+    );
   }
 
   const handleSelectRestaurant = (restaurant) => {
@@ -43,7 +49,12 @@ function Restaurants({ saveRestaurant, setSaveRestaurant }) {
         className="flex-grow-1 position-relative bg-light border-bottom"
         style={{ minHeight: "60vh" }}
       >
-        <BadgerMap data={restaurants} activeId={activeId} />
+        <BadgerMap
+          data={restaurants}
+          activeId={activeId}
+          setActiveId={setActiveId}
+          cardRefs={cardRefs}
+        />
       </div>
 
       {/* carousel */}
@@ -54,6 +65,7 @@ function Restaurants({ saveRestaurant, setSaveRestaurant }) {
           activeId={activeId}
           savedId={saveRestaurant}
           onSelect={handleSelectRestaurant}
+          cardRefs={cardRefs}
         />
       </div>
     </div>

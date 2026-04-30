@@ -188,3 +188,7 @@ code {
     transform: translateY(-10px);
   }
 }
+
+.hover-opacity-100:hover {
+  opacity: 30 !important;
+}

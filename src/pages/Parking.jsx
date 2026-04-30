@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase.js";
 import ParkingCard from "../components/ParkingCard.jsx";
 import BadgerMap from "../components/BadgerMap.jsx";
+import { Spinner } from "react-bootstrap";
 
 function Parking({ savedLot, setSavedLot }) {
   const [parkingSpots, setParkingSpots] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeId, setActiveId] = useState(null);
+  const cardRefs = useRef({});
 
   // CORS proxy: city of madison stated that their live data is available
   // for app development, but does not currently support cross-origin requests
@@ -56,7 +58,11 @@ function Parking({ savedLot, setSavedLot }) {
   }, []);
 
   if (loading) {
-    return <p>Loading parking options...</p>;
+    return (
+      <div className="text-center py-4">
+        <Spinner animation="border" variant="danger" />
+      </div>
+    );
   }
 
   const handleSelectLot = (lot) => {
@@ -74,13 +80,14 @@ function Parking({ savedLot, setSavedLot }) {
           padding: "20px",
         }}
       >
-        <h2 className="fw-bold mb-4">Parking Options</h2>
+        <h1 className="fw-bold mb-4">Parking Options</h1>
         <div className="d-flex flex-column gap-3">
           {parkingSpots.map((spot) => (
             <div
               key={spot.id}
               onMouseEnter={() => setActiveId(spot.id)}
               onMouseLeave={() => setActiveId(null)}
+              ref={(el) => (cardRefs.current[spot.id] = el)}
             >
               <ParkingCard
                 lot={spot}
@@ -95,7 +102,12 @@ function Parking({ savedLot, setSavedLot }) {
 
       {/* map */}
       <div className="flex-grow-1 bg-white">
-        <BadgerMap data={parkingSpots} activeId={activeId} />
+        <BadgerMap
+          data={parkingSpots}
+          activeId={activeId}
+          setActiveId={setActiveId}
+          cardRefs={cardRefs}
+        />
       </div>
     </div>
   );

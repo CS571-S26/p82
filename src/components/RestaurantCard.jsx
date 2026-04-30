@@ -2,8 +2,6 @@ import { Card, Badge, Button } from "react-bootstrap";
 import { Star, MapPin, CalendarCheck } from "lucide-react";
 
 export default function RestaurantCard({ restaurant, isSelected, isSaved, onSelect }) {
-  const placeholderImg = `https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=500&auto=format&fit=crop`;
-
   return (
     <Card
       className={`h-100 shadow-sm border-0 transition-all ${isSelected ? "shadow-lg" : ""}`}
@@ -18,6 +16,7 @@ export default function RestaurantCard({ restaurant, isSelected, isSaved, onSele
         <Card.Img
           variant="top"
           src={restaurant.img}
+          alt={restaurant.name}
           style={{ objectFit: "cover", height: "100%" }}
         />
         <Badge bg="dark" className="position-absolute top-0 end-0 m-2">
@@ -56,8 +55,13 @@ export default function RestaurantCard({ restaurant, isSelected, isSaved, onSele
         {/* avg wait time */}
         <div className="mt-auto d-flex flex-column gap-2">
           <Badge
-            bg={restaurant.avgWait > 40 ? "danger-subtle" : "success-subtle"}
-            className={`py-2 border ${restaurant.avgWait > 40 ? "text-danger border-danger-subtle" : "text-success border-success-subtle"}`}
+            bg=""
+            style={{
+              backgroundColor: restaurant.avgWait > 40 ? "#FAE0E3" : "#DDEEE6",
+              color: restaurant.avgWait > 40 ? "#C72334" : "#16794B",
+              border: `1px solid ${restaurant.avgWait > 40 ? "#C72334" : "#16794B"}33`,
+            }}
+            className="py-2 fw-bold"
           >
             Wait Time: {restaurant.avgWait} mins
           </Badge>

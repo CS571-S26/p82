@@ -7,6 +7,8 @@ export default function HeroSection() {
   return (
     <div
       className="text-white py-5 d-flex align-items-center"
+      role="img"
+      aria-label="Camp Randall Stadium during a Wisconsin Badgers football game"
       style={{
         minHeight: "500px",
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${campRandallImg})`,

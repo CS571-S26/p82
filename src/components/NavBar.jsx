@@ -35,8 +35,7 @@ export default function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/"
-                active={isActive("/")}
-                className="d-flex align-items-center gap-1"
+                className={`d-flex align-items-center gap-1 ${isActive("/") ? "active" : ""}`}
               >
                 <Home size={18} />
                 Home
@@ -44,8 +43,7 @@ export default function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/about"
-                active={isActive("/about")}
-                className="d-flex align-items-center gap-1"
+                className={`d-flex align-items-center gap-1 ${isActive("/about") ? "active" : ""}`}
               >
                 <Info size={18} />
                 About
@@ -53,8 +51,7 @@ export default function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/parking-map"
-                active={isActive("/parking-map")}
-                className="d-flex align-items-center gap-1"
+                className={`d-flex align-items-center gap-1 ${isActive("/parking-map") ? "active" : ""}`}
               >
                 <MapPin size={18} />
                 Parking
@@ -62,8 +59,7 @@ export default function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/restaurant-finder"
-                active={isActive("/restaurant-finder")}
-                className="d-flex align-items-center gap-1"
+                className={`d-flex align-items-center gap-1 ${isActive("/restaurant-finder") ? "active" : ""}`}
               >
                 <Utensils size={18} />
                 Restaurants
@@ -71,8 +67,7 @@ export default function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/dashboard"
-                active={isActive("/dashboard")}
-                className="d-flex align-items-center gap-1"
+                className={`d-flex align-items-center gap-1 ${isActive("/dashboard") ? "active" : ""}`}
               >
                 <LayoutDashboard size={18} />
                 Dashboard

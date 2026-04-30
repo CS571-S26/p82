@@ -20,8 +20,8 @@ const ParkingCard = ({ lot, isSelected, isSaved, onSelect }) => {
       <Card.Body className="p-3">
         {/* sidebar */}
         <div className="d-flex justify-content-between align-items-start mb-2">
-          <h5 className="fw-bold mb-0">{lot.name}</h5>
-          <Badge bg={lot.vacant > 10 ? "success" : "warning"}>
+          <h2 className="h5 fw-bold mb-0">{lot.name}</h2>
+          <Badge bg={lot.vacant > 10 ? "success" : "danger"}>
             {lot.liveId ? vacantDisplay : totalDisplay} spots
           </Badge>
         </div>

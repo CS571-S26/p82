@@ -1,11 +1,19 @@
 import RestaurantCard from "./RestaurantCard";
 
-export default function RestaurantCarousel({ data, onHover, activeId, savedId, onSelect }) {
+export default function RestaurantCarousel({
+  data,
+  onHover,
+  activeId,
+  savedId,
+  onSelect,
+  cardRefs,
+}) {
   return (
     <div className="d-flex overflow-auto px-3 gap-3 no-scrollbar" style={{ paddingBottom: "10px" }}>
       {data.map((res) => (
         <div
           key={res.id}
+          ref={(el) => (cardRefs.current[res.id] = el)}
           onMouseEnter={() => onHover(res.id)}
           onMouseLeave={() => onHover(null)}
           style={{
@@ -15,7 +23,6 @@ export default function RestaurantCarousel({ data, onHover, activeId, savedId, o
           }}
         >
           <RestaurantCard
-            key={res.id}
             restaurant={res}
             isSelected={activeId === res.id}
             isSaved={savedId?.id === res.id}
